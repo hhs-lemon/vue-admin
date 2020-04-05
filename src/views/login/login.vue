@@ -8,25 +8,25 @@
             欢迎登录
           </p>
           <div class="form-con">
-            <Form ref="loginForm" :model="form" :rules="rules">
-              <FormItem prop="userName">
+            <el-form ref="loginForm" :model="form" :rules="rules">
+              <el-form-item prop="userName">
                 <Input v-model="form.userName" placeholder="请输入用户名">
                 <span slot="prepend">
                     <Icon :size="16" type="person"></Icon>
                   </span>
                 </Input>
-              </FormItem>
-              <FormItem prop="password">
+              </el-form-item>
+              <el-form-item prop="password">
                 <Input type="password" v-model="form.password" placeholder="请输入密码">
                 <span slot="prepend">
                     <Icon :size="14" type="locked"></Icon>
                   </span>
                 </Input>
-              </FormItem>
-              <FormItem>
-                <Button @click="handleSubmit" type="primary" long>登录</Button>
-              </FormItem>
-            </Form>
+              </el-form-item>
+              <el-form-item>
+                <el-button @click="handleSubmit" class="login-btn" type="primary" long>登录</el-button>
+              </el-form-item>
+            </el-form>
             <p class="login-tip">密码:123456</p>
           </div>
         </Card>
@@ -38,11 +38,12 @@
 <script>
   import Cookies from 'js-cookie';
   import particles from 'particles.js'
+
   export default {
-      mounted() {
-      particlesJS.load('particles','../../static/particles.json');
+    mounted() {
+      particlesJS.load('particles', '../../static/particles.json');
     },
-    data () {
+    data() {
       return {
         form: {
           userName: 'admin',
@@ -59,7 +60,7 @@
       };
     },
     methods: {
-      handleSubmit () {
+      handleSubmit() {
         this.$refs.loginForm.validate((valid) => {
           if (valid) {
             if (this.form.password !== "123456") {
@@ -83,11 +84,12 @@
   }
 </script>
 <style lang="less">
-  canvas{
-    display:block;
-    vertical-align:bottom;
+  canvas {
+    display: block;
+    vertical-align: bottom;
   }
-  #particles{
+
+  #particles {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -95,6 +97,7 @@
     background-repeat: no-repeat;
     background-size: cover;
   }
+
   .login {
     width: 100%;
     height: 100%;
@@ -117,6 +120,9 @@
       }
       .form-con {
         padding: 10px 0 0;
+        .login-btn {
+          width: 100%;
+        }
       }
       .login-tip {
         font-size: 10px;

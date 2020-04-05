@@ -3,6 +3,10 @@ import App from './App'
 import router from './router'
 import store from './store'
 import iView from 'iview'
+
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+
 import particles from 'particles.js'
 // import 'iview/src/styles/index.less'
 import NProgress from 'nprogress'; // Progress 进度条
@@ -14,23 +18,26 @@ import 'normalize.css/normalize.css';// normalize.css 样式格式化
 // Vue.prototype.$echarts = echarts;
 
 Vue.use(iView);
+
+Vue.use(ElementUI);
+
 Vue.use(particles)
 NProgress.configure({});
 Vue.config.productionTip = false;
 
 
 const whiteList = ['/login'];
-  router.beforeEach((to, from, next) => {
+router.beforeEach((to, from, next) => {
   NProgress.start(); // 开启Progress
   if (store.getters.userInfo) {
     if (to.path === '/login') {
       next();
-    }else{
+    } else {
       store.dispatch('GenerateRoutes', "").then(() => {
         next();
       })
     }
-  }else{
+  } else {
     if (whiteList.indexOf(to.path) !== -1) { // 在免登录白名单，直接进入
       next();
     } else {
@@ -50,5 +57,5 @@ new Vue({
   router,
   store,
   template: '<App/>',
-  components: { App }
+  components: {App}
 })
